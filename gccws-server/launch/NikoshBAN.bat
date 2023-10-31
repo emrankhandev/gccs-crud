@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=NikoshBAN.jar -DgroupId=addie-font -DartifactId=nikosh-ban -Dversion=1.0 -Dpackaging=jar

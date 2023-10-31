@@ -1,0 +1,130 @@
+<div>
+<!--  <h4 class="text-center">{{'approvalInfo' | translate}}</h4>-->
+
+  <c-card class="mb-4">
+    <!--header-->
+    <c-card-header class="modal-header">
+      <div>
+        <strong class="text-center">{{'approvalInfo' | translate}}</strong>
+      </div>
+
+    </c-card-header>
+    <c-card-body [formGroup]="frmGroup">
+      <form cForm>
+        <!--form row-->
+        <c-row *ngIf="this.isNeedToCheckAmount()">
+          <p  class="text-center mb-2 text-danger">{{'approvalLimit' |translate}} <strong>{{approvalConfigurationModel.fromAmount}}</strong> {{'to'|translate}} <strong>{{approvalConfigurationModel.toAmount}}</strong></p>
+        </c-row>
+
+        <c-row>
+          <!-- toTeam-->
+          <c-col lg="6" md="6" xs="12" class="mb-2" *ngIf="this.approvalTeamDropdownList.length > 0">
+            <label cLabel>
+              <span *ngIf="!isWorkOnBack">{{'approval' | translate}}</span>
+              <span *ngIf="isWorkOnBack">{{'backed' | translate}}</span>
+              &emsp;{{'team' | translate}}
+              <strong class="icon-warn">*</strong>
+            </label>
+            <mat-select-search
+              [isReadonly]="!isDisabled"
+              [formGroup]="frmGroup"
+              [controlName]="'approvalTeam'"
+              [data]="approvalTeamDropdownList"
+              (selectionChange)="onApproveTeamChange()">
+            </mat-select-search>
+          </c-col>
+          <!-- notifyUser-->
+          <c-col lg="6" md="6" xs="12" class="mb-2" *ngIf="this.approvalTeamDropdownList.length > 0">
+            <label cLabel>
+              {{'notifyUser' | translate}}
+              <strong class="icon-warn">*</strong>
+            </label>
+            <mat-select-search
+              [isReadonly]="!isDisabled"
+              [formGroup]="frmGroup"
+              [controlName]="'notifyUser'"
+              [data]="notifyUserDropdownList">
+            </mat-select-search>
+          </c-col>
+        </c-row>
+        <c-row>
+          <!-- comment-->
+          <c-col lg="12" md="12" xs="12" class="mb-2">
+            <label cLabel>
+              {{'comment' | translate}}
+            </label>
+            <textarea  cFormControl sizing="sm" rows="3" maxlength="4000" #message formControlName="approvalComment"></textarea>
+            <mat-hint>{{message.value.length}} / 4000</mat-hint>
+            <!--error message-->
+            <addies-error [formGroup]="this.frmGroup" [controlName]="'approvalComment'"></addies-error>
+          </c-col>
+
+        </c-row>
+      </form>
+      <!-- button row-->
+      <div>
+        <!--submit section-->
+        <div *ngIf="!approvalTransactionType.approvalHistoryId">
+          <button  class="custom-btn btn-theme  mb-2" size="sm" (click)="openSubmitConfirmationDialog()"
+                   [disabled]="!frmGroup.valid || isLoading">
+            <svg cIcon class="me-2 " name="cil-exit-to-app" *ngIf="!isLoading"></svg>
+            <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+            {{'submitValue' | translate}}
+          </button>
+        </div>
+        <!-- //submit section-->
+        <!-- approve submit back section-->
+        <div *ngIf="approvalTransactionType.approvalHistoryId">
+          <div class="d-flex w-100 justify-content-between">
+            <c-form-check class="mt-2" *ngIf="hasBackPermission">
+              <input class="theme-color" cFormCheckInput type="checkbox" formControlName="needToBack" (ngModelChange)="onChangeNeedToBack()"/>
+              <label cFormCheckLabel> {{'needToBack' | translate}}</label>
+            </c-form-check>
+            <c-form-check class="mt-2 ms-2">
+              <input class="theme-color" cFormCheckInput type="checkbox" formControlName="needToReject" (ngModelChange)="onChangeNeedToReject()"/>
+              <label cFormCheckLabel> {{'needToReject' | translate}}</label>
+            </c-form-check>
+          </div>
+          <div class="d-flex w-100 justify-content-between">
+            <button class="custom-btn btn-warn me-3 mb-2"  size="sm" (click)="openBackConfirmationDialog()" *ngIf="isWorkOnBack"
+                    [disabled]="!frmGroup.valid || isLoading">
+              <i class="fas fa-backward" *ngIf="!isLoading"></i>
+              <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+              {{'back' | translate}}
+            </button>
+
+            <button class="custom-btn btn-warn me-3 mb-2"  size="sm" (click)="openRejectConfirmationDialog()" *ngIf="isWorkOnReject "
+                    [disabled]="!frmGroup.valid || isLoading">
+              <i class="fas fa-backward" *ngIf="!isLoading"></i>
+              <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+              {{'reject' | translate}}
+            </button>
+          </div>
+
+
+
+          <button  class="custom-btn bg-info me-3 mb-2" size="sm" (click)="openForwardConfirmationDialog()" *ngIf="!isWorkOnBack  && this.approvalTeamDropdownList.length > 0"
+                   [disabled]="!frmGroup.valid || isLoading">
+            <i class="fas fa-forward" *ngIf="!isLoading"></i>
+            <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+            {{'forward' | translate}}
+          </button>
+<!--          <button  class=" custom-btn btn-theme me-3 mb-2" size="sm"  (click)="openApproveConfirmationDialog()"-->
+          <button   class=" custom-btn btn-theme me-3 mb-2" size="sm"  (click)="onCheckValidAmount()"
+                   *ngIf="!isWorkOnBack && !isWorkOnReject && this.model && this.model.approvalStatusId !== this.approvalStatusService.BACK && approvalConfigurationModel && approvalConfigurationModel.approvalPermission"
+                   [disabled]="!frmGroup.valid || isLoading">
+            <i class="fas fa-thumbs-up" *ngIf="!isLoading"></i>
+            <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+            {{'approve' | translate}}
+          </button>
+        </div>
+        <!-- // approve submit back section-->
+
+      </div>
+
+    </c-card-body>
+  </c-card>
+
+
+</div>
+

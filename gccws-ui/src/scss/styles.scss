@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+// If you want to override variables do it here
+
+$enable-ltr: true;
+$enable-rtl: true;
+
+// Import styles with default layout.
+@import "~@coreui/coreui/scss/coreui";
+
+// Import Chart.js custom tooltips styles
+@import "~@coreui/chartjs/scss/coreui-chartjs";
+
+// perfect scrollbar theming for use with [perfectScrollbar] directive
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+@import "layout";
+
+// Some temp fixes
+@import "fixes";
+
+// Prism.js
+@import "examples";
+
+// If you want to add something do it here
+@import "custom";
+@import "google-roboto-font";
+@import "google-material-and-icons";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.cdk-overlay-container {
+  z-index: 9999 !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color: black!important;
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  background-color:  black!important
+}
+// dropdown
+.matSelect {
+  padding-left: 5px;
+}

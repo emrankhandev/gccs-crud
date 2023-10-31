@@ -1,0 +1,102 @@
+<div style="width: 100%">
+  <!-- close Button-->
+  <div  class="text-end">
+    <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+  </div>
+  <!-- // close Button-->
+  <div class="bg pt-1">
+    <div class="container ">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="contact-form">
+            <h1 class="text-center" id="signup-text">Sign Up</h1>
+            <form [formGroup]="frmGroup">
+              <div class="row mt-5">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label">Name </label>
+                    <strong class="icon-warn">*</strong>
+                    <div class="input-group col-sm-10 mt-2">
+                      <input type="text" class="form-control"placeholder="Enter Your Name" formControlName="name">
+                    </div>
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'name'"></addies-error>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label">Email as User Name </label>
+                    <strong class="icon-warn">*</strong>
+                    <div class="input-group col-sm-10 mt-2">
+                      <input  autocomplete="new-password" type="email" class="form-control"placeholder="payra@gmail.com" formControlName="email"   (blur)="checkEmail()">
+                    </div>
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'email'"></addies-error>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-lg-6">
+                  <div class="form-group inner-addon right-addon">
+                    <label class="control-label">Password </label>
+                    <strong class="icon-warn">*</strong>
+                    <div class="col-sm-8 mt-2 input-group pass-control" >
+                      <input  autocomplete="new-password" [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Password Here" formControlName="password" (input)="checkPassword()"
+                              [matTooltip]="'Use ' + passwordPolicy?.minLength + ' or more characters '+(passwordPolicy?.alphanumeric? ',  mix of letters & numbers':'')"   />
+                      <i alt="show" class="far fa-eye eye-show"
+                         (click)="showPassword = !showPassword"
+                         [class.hide]="showPassword"></i>
+                      <i alt="hide" class="far fa-eye-slash eye-hide"
+                         (click)="showPassword = !showPassword"
+                         [class.hide]="!showPassword"></i>
+                    </div>
+                     <div class="icon-warn" *ngIf="passwordPolicy">
+               <span [style.color]="policyColor.minLength">use {{passwordPolicy.minLength}} or more characters</span>
+               <span [style.color]="policyColor.alphanumeric" *ngIf="passwordPolicy.alphanumeric">, &nbsp; mix of letters & numbers</span>
+               <span [style.color]="policyColor.sequential" *ngIf="passwordPolicy.sequential">, &nbsp;avoid sequential ex. 123  abc</span>
+               <span [style.color]="policyColor.specialChar" *ngIf="passwordPolicy.specialChar">, &nbsp;add special char (ex. !@#$%)</span>
+               <span [style.color]="policyColor.upperLower" *ngIf="passwordPolicy.upperLower">, &nbsp;add upper and lower (ex. ABcd)</span>
+               <span [style.color]="policyColor.matchUsername" *ngIf="passwordPolicy.matchUsername">, &nbsp;match with username</span>
+             </div>
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'password'"></addies-error>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group inner-addon right-addon">
+                    <label class="control-label">Confirm Password </label>
+                    <strong class="icon-warn">*</strong>
+                    <div class="col-sm-8 mt-2 input-group pass-control" >
+                      <input  [type]="showConfirmPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm Password Here" formControlName="confirmPassword"   >
+                      <i alt="show" class="far fa-eye eye-show"
+                         (click)="showConfirmPassword = !showConfirmPassword"
+                         [class.hide]="showConfirmPassword"></i>
+                      <i alt="hide" class="far fa-eye-slash eye-hide"
+                         (click)="showConfirmPassword = !showConfirmPassword"
+                         [class.hide]="!showConfirmPassword"></i>
+                    </div>
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'confirmPassword'"></addies-error>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <div class="input-group col-sm-offset-2 col-sm-10 mt-4">
+                  <button type="submit" class="btn btn-theme" id="btn" [disabled]="!frmGroup.valid || this.isLoading" (click)="OtpDialog()">
+                    <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                    <ng-container *ngIf="!isLoading">Sign Up</ng-container>
+                  </button>
+                </div>
+              </div>
+              <div class="form-group mt-3 pb-5">
+                <div class="col-md-12 control">
+                  <div class="text-center" >
+                    Already Have Account? <a class="btn-link" (click)="closeDialog()">Log In</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

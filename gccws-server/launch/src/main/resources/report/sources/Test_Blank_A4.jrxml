@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2020-04-18T00:53:34 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="76ed7d47-176f-4862-ad46-35c33edc274f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Inventory"/>
+	<parameter name="P_TITLE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="P_HEADER_TEXT" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="LOGO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Common_Header" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="Test_Blank_A4_Subreport_Blank_A4_1" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[select * from rec_exam_center_master]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="code" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bangla_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="2" width="554" height="88" uuid="fbc83aed-e039-41cf-8369-f71043eb6eac"/>
+				<subreportParameter name="HEADER_TEXT">
+					<subreportParameterExpression><![CDATA[$P{P_HEADER_TEXT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOGO">
+					<subreportParameterExpression><![CDATA[$P{LOGO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{Common_Header}]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32">
+			<textField>
+				<reportElement x="2" y="2" width="553" height="30" uuid="687d9174-8cad-4951-8ee8-a16608c2f110"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_TITLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="37" y="0" width="100" height="30" uuid="aae1a2f2-6589-4226-bc4c-764222ec091b"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="0" width="100" height="30" uuid="416ba5e8-a797-4a0b-94be-91d94461e7a1"/>
+				<text><![CDATA[code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="100" height="30" uuid="355123b8-8be5-4396-8f82-82b70deb30a2"/>
+				<text><![CDATA[name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="441" y="0" width="100" height="30" uuid="9da9a503-c4ca-4504-8320-02b1691bd370"/>
+				<text><![CDATA[bangla_name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="150" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="5" width="100" height="30" uuid="5912379c-a031-4c93-bcf2-4d3ee6a92086"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="154" y="6" width="100" height="30" uuid="384cef57-d495-442e-af0f-294ce4874333"/>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="6" width="100" height="30" uuid="8cdd2038-0ccd-45ef-a336-ced865cece8c"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="8" width="100" height="30" uuid="41bcda4b-11db-466e-8751-b3dc771c980a"/>
+				<textFieldExpression><![CDATA[$F{bangla_name}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="30" y="100" width="510" height="50" uuid="ce45c2ba-9c7b-4658-9a69-1af9d7a36d1c"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{Test_Blank_A4_Subreport_Blank_A4_1}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

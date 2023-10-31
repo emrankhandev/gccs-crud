@@ -1,0 +1,12 @@
+<h2 mat-dialog-title *ngIf="title">{{title}}</h2>
+<h2 class="confirmation-text" mat-dialog-title *ngIf="!title">{{'Confirmation'}}</h2>
+<hr>
+<mat-dialog-content class="text-center mt-4">
+  <p style="font-size: large">{{ message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center" class="mt-5">
+  <button class="item-right custom-btn btn-warn-cancel" (click)="confirm(false)" size="lg">Cancel</button>
+  <button class="item-right custom-btn color-theme ms-2" (click)="confirm(true)" size="lg">Confirm</button>
+
+</mat-dialog-actions>
+

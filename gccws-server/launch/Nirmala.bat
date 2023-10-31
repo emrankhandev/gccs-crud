@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=Nirmala.jar -DgroupId=addie-font -DartifactId=nirmala -Dversion=1.0 -Dpackaging=jar

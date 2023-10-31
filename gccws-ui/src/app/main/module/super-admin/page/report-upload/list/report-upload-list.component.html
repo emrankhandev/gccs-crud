@@ -1,0 +1,162 @@
+<c-row ngPreserveWhitespaces>
+
+  <c-col>
+    <c-card>
+
+      <!--header-->
+      <c-card-header class="table-header">
+        <strong>{{'title' | translate}}</strong>
+        <button id="add-btn" class="item-right custom-btn btn-theme" (click)="openAddDialog(false)" size="sm" *ngIf="pagePermission.insert">
+          <svg cIcon name="cil-plus"
+               cTooltipPlacement="top">
+          </svg>
+          {{'addNew' | translate}}</button>
+      </c-card-header>
+      <!-- // header-->
+
+      <!--body-->
+      <c-card-body>
+        <!--table data-->
+        <c-col *ngIf="pagePermission.view">
+          <!-- search div-->
+          <c-row class="mb-2 ">
+            <c-col lg="3" md="6" xs="12">
+              <c-input-group class="has-validation">
+                <span cInputGroupText><mat-icon>search</mat-icon></span>
+                <input cFormControl sizing="sm" type="text" [placeholder]="'search' | translate" (keyup)="applyFilter($event)"/>
+                <c-form-feedback></c-form-feedback>
+              </c-input-group>
+            </c-col>
+          </c-row>
+          <!-- // search div-->
+
+          <!-- table div-->
+          <div>
+
+            <table mat-table [dataSource]="dataSource" class="customers">
+
+              <!-- slNo -->
+              <ng-container matColumnDef="slNo">
+                <th *matHeaderCellDef style="width: 56px;">
+                  {{'slNo' | translate}}
+                </th>
+                <td class="text-center" mat-cell *matCellDef="let row; let i=index;">
+                  {{i+1}}
+                </td>
+              </ng-container>
+
+              <!-- name -->
+              <ng-container matColumnDef="code">
+                <th *matHeaderCellDef>
+                  {{'code' | translate}}
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.code }}
+                </td>
+              </ng-container>
+
+              <!-- Bangla name -->
+              <ng-container matColumnDef="fileName">
+                <th *matHeaderCellDef>
+                  {{'fileName' | translate}}
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.fileName }}
+                </td>
+              </ng-container>
+
+              <!-- parent -->
+              <ng-container matColumnDef="remarks">
+                <th *matHeaderCellDef>
+                  {{'remarks' | translate}}
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.remarks}}
+                </td>
+              </ng-container>
+
+              <!-- status -->
+              <ng-container matColumnDef="isSubreport">
+                <th *matHeaderCellDef>
+                  {{'isSubreport' | translate}}
+                </th>
+                <td class="text-center" mat-cell *matCellDef="let row">
+                  <mat-icon class="icon-theme"  *ngIf="row.isSubreport">check_circle</mat-icon>
+                  <mat-icon class="icon-warn"  *ngIf="!row.isSubreport">cancel</mat-icon>
+                </td>
+              </ng-container>
+
+              <!-- status -->
+              <!--<ng-container matColumnDef="status">
+                <th *matHeaderCellDef>
+                  {{'status' | translate}}
+                </th>
+                <td class="text-center" mat-cell *matCellDef="let row">
+                  <mat-icon class="icon-theme"  *ngIf="row.active">check_circle</mat-icon>
+                  <mat-icon class="icon-warn"  *ngIf="!row.active">cancel</mat-icon>
+                </td>
+              </ng-container>-->
+
+              <!-- Action Column -->
+              <ng-container matColumnDef="action">
+                <th *matHeaderCellDef>
+                  {{'action' | translate}}
+                </th>
+
+                <td mat-cell *matCellDef="let row" class="text-center">
+                  <div class="buttons">
+                    <span class="action" (click)="download(row)" [matTooltip]="'download'| translate">
+                      <svg cIcon class="me-2 icon-download" name="cil-data-transfer-down"
+                           cTooltipPlacement="top">
+                      </svg>
+                    </span>
+                    <span class="action" (click)="openAddDialog(true, row)" [matTooltip]="'edit'| translate" *ngIf="pagePermission.edit">
+                      <svg cIcon class="me-2 icon-theme" name="cil-pencil"
+                           cTooltipPlacement="top">
+                      </svg>
+                    </span>
+                    <span class="action" (click)="openDeleteDialog(row)" [matTooltip]="'delete'| translate" *ngIf="pagePermission.delete">
+                       <svg cIcon class="me-2 icon-warn" name="cil-trash"
+                            cTooltipPlacement="top">
+                       </svg>
+                    </span>
+                  </div>
+                </td>
+              </ng-container>
+              <!-- Table Action Buttons End-->
+
+              <!--bind with ts-->
+              <tr mat-header-row
+                  *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row class="table-row"
+                  *matRowDef="let row; columns: displayedColumns"></tr>
+              <!-- // bind with ts-->
+
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="6">
+                  {{'noDataFound' | translate}}
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- // table div-->
+
+          <!-- pagination -->
+          <mat-paginator [length]="total" [pageSize]="size"
+                         [pageSizeOptions]="this.paginationArray"
+                         (page)="onChangePage($event)"></mat-paginator>
+
+          <!-- // pagination-->
+        </c-col>
+        <!-- // table data-->
+      </c-card-body>
+      <!--body-->
+
+    </c-card>
+
+  </c-col>
+
+</c-row>
+
+

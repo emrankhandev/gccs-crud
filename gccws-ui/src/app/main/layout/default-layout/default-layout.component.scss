@@ -1,0 +1,44 @@
+#sidebar{
+  background-color:
+    #17483f;
+}
+
+$btn-default1: #06294E;
+$btn-default2: #336BB3;
+
+.active{
+  text-align: center;
+  background-color:
+    #17483f;
+  margin-bottom: 0px;
+}
+
+.activeUser{
+  //font-weight: bold;
+  font-size: 14px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid
+  #17483f;
+  border-bottom: 3px solid #94A3B8;
+}
+.activeUserName{
+  font-weight: 580;
+  font-size: 15px;
+  margin: 5px;
+}
+
+.nav-link{
+  color: white;
+}
+
+#main-body{
+  //width: 100%
+}
+
+.sidebar-logo{
+  height: 47px;
+}
+
+.user{
+  margin-top: 1px;
+}

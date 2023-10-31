@@ -1,0 +1,114 @@
+<div style="width: 100%">
+
+  <!-- close Button-->
+  <div  class="text-end">
+    <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+  </div>
+  <!-- // close Button-->
+
+  <!-- Main -->
+  <div>
+    <c-row>
+        <c-col xs="12">
+          <c-card class="mb-4">
+            <!--header-->
+            <c-card-header>
+              <strong>{{'menuitemDetails'| translate}}</strong>
+            </c-card-header>
+            <!-- // header-->
+            <c-card-body>
+              <c-row>
+                <c-col lg="6" md="6" xs="12">
+                  <c-row>
+                    <c-col lg="4" md="4" xs="6"><p>{{'name'|translate}}</p></c-col>
+                    <c-col lg="1" md="1" >:</c-col>
+                    <c-col lg="7" md="7" xs="6"><p>{{model.name}}</p></c-col>
+                  </c-row>
+                </c-col>
+                <c-col lg="6" md="6" xs="12">
+                  <c-row>
+                    <c-col lg="4" md="4" xs="6">{{'banglaName' | translate}}</c-col>
+                    <c-col lg="1" md="1" >:</c-col>
+                    <c-col lg="7" md="7" xs="6">{{model.banglaName}}</c-col>
+                  </c-row>
+                </c-col>
+              </c-row>
+              <c-row>
+                <c-col lg="6" md="6" xs="12">
+                  <c-row>
+                    <c-col lg="4" md="4" xs="6"><p> {{'menuType' | translate}}</p></c-col>
+                    <c-col lg="1" md="1" >:</c-col>
+                    <c-col lg="7" md="7" xs="6"><p>{{model.menuTypeName}}</p></c-col>
+                  </c-row>
+                </c-col>
+                <c-col lg="6" md="6" xs="12">
+                  <c-row>
+                    <c-col lg="4" md="4" xs="6"><p>{{ 'serialNo' | translate}}</p></c-col>
+                    <c-col lg="1" md="1" >:</c-col>
+                    <c-col lg="7" md="7" xs="6"><p>{{model.serialNo}}</p></c-col>
+                  </c-row>
+                </c-col>
+              </c-row>
+              <c-row>
+                <c-col lg="6" md="6" xs="12">
+                  <c-row>
+                    <c-col lg="4" md="4" xs="6"><p>{{'parent' | translate}}</p></c-col>
+                    <c-col lg="1" md="1" >:</c-col>
+                    <c-col lg="7" md="7" xs="6"><p>{{model.name}}</p></c-col>
+                  </c-row>
+                </c-col>
+                <c-col lg="6" md="6" xs="12">
+                  <c-row>
+                    <c-col lg="4" md="4" xs="6"><p>{{'url' | translate}}</p></c-col>
+                    <c-col lg="1" md="1" >:</c-col>
+                    <c-col lg="7" md="7" xs="6"><p>{{model.url}}</p></c-col>
+                  </c-row>
+                </c-col>
+              </c-row>
+<!--              action-->
+              <c-row *ngIf="model.menuType == menuTypeService.MENU_ID">
+                <table id="table">
+                  <tr>
+                    <th> {{'viewDetails' | translate}}</th>
+                    <th>{{'insert' | translate}}</th>
+                    <th> {{'update' | translate}}</th>
+                    <th>{{'delete' | translate}}</th>
+                    <th>{{'approve' | translate}}</th>
+                  </tr>
+                  <tr>
+                    <!-- view details-->
+                    <td class="text-center">
+                      <mat-icon class="icon-theme"  *ngIf="model.view == true">check_circle</mat-icon>
+                      <mat-icon class="icon-warn"  *ngIf="!model.view == true">cancel</mat-icon>
+                    </td>
+                    <!-- insert-->
+                    <td class="text-center">
+                      <mat-icon class="icon-theme"  *ngIf="model.insert == true">check_circle</mat-icon>
+                      <mat-icon class="icon-warn"  *ngIf="!model.insert == true">cancel</mat-icon>
+                    </td>
+                    <!-- update-->
+                    <td class="text-center">
+                      <mat-icon class="icon-theme"  *ngIf="model.edit == true">check_circle</mat-icon>
+                      <mat-icon class="icon-warn"  *ngIf="!model.edit == true">cancel</mat-icon>
+                    </td>
+                    <!--  delete-->
+                    <td class="text-center">
+                      <mat-icon class="icon-theme"  *ngIf="model.delete == true">check_circle</mat-icon>
+                      <mat-icon class="icon-warn"  *ngIf="!model.delete == true">cancel</mat-icon>
+                    </td>
+                    <!--  approve-->
+                    <td class="text-center">
+                      <mat-icon class="icon-theme"  *ngIf="model.approve == true">check_circle</mat-icon>
+                      <mat-icon class="icon-warn"  *ngIf="!model.approve == true">cancel</mat-icon>
+                    </td>
+                  </tr>
+                </table>
+              </c-row>
+            </c-card-body>
+
+          </c-card>
+        </c-col>
+      </c-row>
+  </div>
+
+</div>

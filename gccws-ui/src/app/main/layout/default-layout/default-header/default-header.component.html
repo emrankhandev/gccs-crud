@@ -1,0 +1,252 @@
+<ng-container>
+  <c-container class="main-head" [fluid]="true">
+
+    <!--toggle button-->
+    <!--toggle button-->
+    <button
+      toggle="visible"
+      cHeaderToggler
+      [cSidebarToggle]="sidebarId"
+      class="ps-1" >
+      <c-avatar style="width: 3.0rem" src="assets/img/logo/gccws-logo.png">
+        <img src="assets/img/logo/gccws-logo.png">
+      </c-avatar>
+    <!--  <svg cIcon
+           name="cilMenu"
+           size="lg"
+      ></svg>-->
+    </button>
+    <!-- // toggle button-->
+    <!-- // toggle button-->
+    <p style="margin: 0">
+      <span style="color: #2b8c44;" class="top-heading">{{'gccws'|translate}}</span>
+      <br>
+      <span style="color: #2b8c44; " class="top-sub-heading">Water Supply Billing Management System</span>
+    </p>
+
+    <c-header-nav class="d-none d-lg-flex me-auto">
+    </c-header-nav>
+    <!-- // divider-->
+
+    <c-header-nav class="d-none d-lg-flex">
+
+
+      <!--message-->
+      <c-header-nav class="ms-3">
+        <ng-container *ngTemplateOutlet="userMessage"></ng-container>
+      </c-header-nav>
+
+      <!--report button-->
+      <c-header-nav class="ms-3">
+        <ng-container *ngTemplateOutlet="userNotify"></ng-container>
+      </c-header-nav>
+
+      <c-nav-item>
+          <a id="report" cNavLink routerLink="/dashboard-home/report" [matTooltip]="'report'| translate">
+<!--            <mat-icon> insert_chart_outlined</mat-icon>-->
+            <img height="24px" width="24px" src="assets/img/dashboard/3d-report.png">
+          </a>
+      </c-nav-item>
+
+      <!-- // report button-->
+
+      <c-dropdown alignment="end" variant="nav-item">
+        <button id="language" style="border: none" cButton color="" [matTooltip]="'language'| translate"
+                [caret]="false" cDropdownToggle class="py-0" >
+          <c-avatar>
+            <img height="24px" width="24px" src="assets/img/dashboard/google.png">
+<!--            <mat-icon>language</mat-icon>-->
+          </c-avatar>
+          <!--{{selectedLanguage | uppercase}}-->
+        </button>
+        <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+          <li cDropdownItem class="action" (click)="setLanguage('en')">
+            English
+          </li>
+          <li cDropdownItem class="action" (click)="setLanguage('bn')">
+            বাংলা
+          </li>
+        </ul>
+      </c-dropdown>
+
+
+      <c-header-nav class="ms-3">
+        <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+      </c-header-nav>
+
+    </c-header-nav>
+  </c-container>
+</ng-container>
+
+<!--logout menu-->
+<ng-template #userDropdown>
+  <c-dropdown style="margin-top: 6px;" alignment="end" variant="nav-item">
+    <button style="border: none"
+      cButton
+      color=""
+      [caret]="false"
+      cDropdownToggle
+      class="py-0">
+      <img  class="topbar-img" src="../../../../../../assets/img/avatars/user.png" alt="logo" width="32px" height="32px">
+<!--      <img *ngIf="customerInfo" class="topbar-img" alt="{{ customerInfo.name }}" src="{{publicFileService.viewImageUrl(customerInfo.logoName)}}" width="32px" height="32px" style="border-radius: 50%">-->
+    </button>
+    <ul cDropdownMenu class="pt-0 pr-5 w-auto">
+
+<!--      <c-nav-item class="mt-2">-->
+<!--        <a cDropdownItem class="action" (click)="openShowDialog()" *ngIf="empPersonalInfo">-->
+<!--          <svg cIcon class="me-2" name="cil-hamburger-menu"></svg>-->
+<!--          {{ 'viewProfile' | translate }}-->
+<!--        </a>-->
+<!--      </c-nav-item>-->
+<!--      <c-nav-item class="mt-2">-->
+<!--        <a cDropdownItem class="action" (click)="openEditProfileDialog()" *ngIf="empPersonalInfo">-->
+<!--          <svg cIcon class="me-2" name="cil-pencil"></svg>-->
+<!--          {{ 'editProfile' | translate }}-->
+<!--        </a>-->
+<!--      </c-nav-item>-->
+      <hr cDropdownDivider/>
+      <c-nav-item class="mt-2">
+        <a cDropdownItem class="action" (click)="resetPassword()">
+          <svg cIcon class="me-2" name="cil-sync"></svg>
+          {{ 'resetPassword' | translate }}
+        </a>
+      </c-nav-item>
+      <c-nav-item class="mt-2">
+        <a cDropdownItem class="action" (click)="approvalHistory()">
+          <svg cIcon class="me-2" name="cil-history"></svg>
+          {{ 'approvalHistory' | translate }}
+        </a>
+      </c-nav-item>
+
+      <hr cDropdownDivider/>
+      <c-nav-item>
+        <a cDropdownItem class="action" (click)="logout()">
+          <svg cIcon class="me-2" name="cil-account-logout"></svg>
+          {{ 'logout' | translate }}
+        </a>
+      </c-nav-item>
+    </ul>
+  </c-dropdown>
+</ng-template>
+
+<!--notification-->
+<ng-template #userNotify>
+  <c-dropdown alignment="end" variant="nav-item">
+    <button [matTooltip]="'notification'| translate "
+      cButton
+      color=""
+      [caret]="false"
+      cDropdownToggle
+      class="py-2 px-3 n-icon" style="margin-right: 10px;">
+      <div class="common" *ngIf="notificationNo > 0">
+        <p *ngIf="notificationNo <= 10" class="notification-no">{{notificationNo}}</p>
+        <p *ngIf="notificationNo > 10" class="notification-no">9<sup>+</sup></p>
+      </div>
+      <img height="24px" width="24px" src="assets/img/dashboard/notiii.png">
+<!--      <mat-icon style="margin-top: 2px;">notification_important</mat-icon>-->
+    </button>
+    <ul cDropdownMenu class="pt-0 pr-5 n-height">
+      <li>
+        <h6 cDropdownHeader class="bg-light py-2" style="font-weight: bold; font-size: small; color: #000">Notification</h6>
+      </li>
+      <!--  notification-->
+      <div *ngIf="notificationList.length > 0">
+        <li *ngFor="let row of notificationList" style="cursor: pointer">
+          <div class="d-flex justify-content-between">
+            <a [class]="row.isSeen ? 'seen':'not-seen'" (click)="isClick(row)"
+               cDropdownItem>
+              <!--[disabled]="isNotificationItemDisable(row)" -->
+              <div class="d-flex justify-content-start m-0 p-0 mt-1">
+            <span [class]="row.iconColor" class="common-notification">
+              <svg cIcon [name]="row.iconName"></svg>
+            </span>
+                <div class="m-0 p-0 w-100">
+                  <p class="mb-1" style="font-weight: bold; font-size:14px"> {{row.fromAppUserName}}</p>
+                  <!--                <p class="mb-1" style="font-weight: bold;"> {{row.fromAppUserName}}</p>-->
+                  <p class="m-0" style="font-weight: bold; font-size: small">{{row.detailText}}</p>
+                  <div class="d-flex justify-content-between">
+                    <p class="m-0" style="font-weight: bold; font-size: xx-small">{{row.entryDate | dateAsAgo}}</p>
+
+                    <p [class]="!row.approvalStatusId ? 'none':(row.isClose ? 'inactive-notification':'active-notification')"></p>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <!-- close Button-->
+            <div  class="text-end m-0">
+              <mat-icon (click)="isCross(row)" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+            </div>
+            <!-- // close Button-->
+          </div>
+
+          <hr class="mt-0 mb-0" cDropdownDivider/>
+        </li>
+      </div>
+      <!-- no notification-->
+      <div *ngIf="notificationList.length <= 0">
+        <p class="no-notification">No notification for you</p>
+      </div>
+    </ul>
+  </c-dropdown>
+</ng-template>
+
+
+<!--message-->
+<ng-template #userMessage>
+  <c-dropdown alignment="end" variant="nav-item" class="message-dropdown">
+    <button [matTooltip]="'message'| translate "
+            cButton
+            color=""
+            [caret]="false"
+            cDropdownToggle
+            class="py-2 px-3 n-icon" style="margin-right: -15px;">
+      <div class="common" *ngIf="messageNo > 0">
+        <p *ngIf="messageNo <= 10" class="notification-no">{{messageNo}}</p>
+        <p *ngIf="messageNo > 10" class="notification-no">9<sup>+</sup></p>
+      </div>
+      <img height="24px" width="24px" src="assets/img/dashboard/chat.png">
+<!--      <mat-icon style="margin-top: 2px;">message</mat-icon>-->
+    </button>
+    <ul cDropdownMenu class="pt-0 pr-5 message-dropdown-menu">
+      <li cDropdownHeader class="bg-light py-2 d-flex justify-content-between" style="font-weight: bold; font-size: small; color: #000">
+        <p>Message</p>
+        <p class="clear-all" (click)="isClearAll($event)">Clear all</p>
+      </li>
+      <!--  notification-->
+      <div *ngIf="messageList.length > 0">
+        <li *ngFor="let row of messageList" style="cursor: pointer">
+          <div class="d-flex justify-content-between">
+            <a [class]="row.isRead ? 'read':'not-read'"  (click)="isClickMessage(row)"
+                cDropdownItem>
+              <div class="d-flex justify-content-start m-0 p-0 mt-1">
+            <span  class="message-notification">
+              <mat-icon style="margin-top: 2px;">message</mat-icon>
+            </span>
+                <div class="m-0 p-0 w-100">
+                  <p class="mb-1 message-heading"> {{row.transactionType}}</p>
+                  <p class="mb-1 message-description"> {{row.message}}</p>
+                  <div class="d-flex justify-content-between">
+                    <p class="m-0" style="font-weight: bold; font-size: xx-small">{{row.publishDate | dateAsAgo}}</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <!-- close Button-->
+            <div  class="text-end m-0">
+              <mat-icon (click)="isCloseMessage(row, $event)" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+            </div>
+            <!-- // close Button-->
+          </div>
+
+          <hr class="mt-0 mb-0" cDropdownDivider/>
+        </li>
+      </div>
+      <!-- no notification-->
+      <div *ngIf="messageList.length <= 0">
+        <p class="no-notification">No message for you</p>
+      </div>
+    </ul>
+  </c-dropdown>
+</ng-template>
+
+

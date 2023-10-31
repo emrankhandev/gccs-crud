@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=zxing-core.jar -DgroupId=addie-zxing -DartifactId=zxing -Dversion=1.0 -Dpackaging=jar

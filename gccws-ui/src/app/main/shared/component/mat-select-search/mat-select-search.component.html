@@ -1,0 +1,30 @@
+<mat-form-field-1 [formGroup]="formGroup" [class]="isReadonly ? 'readonly-wrapper flex-auto gt-xs:pr-3' : 'flex-auto gt-xs:pr-3'" style="width: 90%; margin-top: 5px;">
+
+  <mat-select *ngIf="data" [class]=" isReadonly? 'matSelect readonly-block' : 'matSelect'"
+              [matTooltip]="formGroup.get(controlName)?.value.name"
+              [matTooltipPosition]="'above'"
+              (selectionChange)="onSelectionChange($event.value)"
+              [formControlName]="controlName" [attr.disabled]="isReadonly">
+
+    <mat-option>
+      <ngx-mat-select-search
+        placeholderLabel="Search"
+        noEntriesFoundLabel="No Match Found"
+        [formControl]="matSelectSearch"
+        (ngModelChange)="onKeyDown($event)">
+              <!--<span aria-hidden="true" class="close" ngxMatSelectSearchClear *ngIf="filterList.length < 1" (click)="onClickAdd()">
+                  <mat-icon>add</mat-icon>
+              </span>-->
+      </ngx-mat-select-search>
+    </mat-option>
+    <mat-option value="" *ngIf="showSelectOne && !isSearch">Select One</mat-option>
+    <mat-option value="" *ngIf="isSearch">Search}</mat-option>
+    <mat-option *ngFor="let item of filteredData | async " [value]="item">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+  <input type="text" readonly matInput [value]="getValueForSelectionControl()" *ngIf="!(data)">
+  <addies-error [formGroup]="formGroup" [controlName]="this.controlName"></addies-error>
+</mat-form-field-1>
+
+

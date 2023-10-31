@@ -1,0 +1,103 @@
+<c-row ngPreserveWhitespaces>
+
+  <c-col >
+    <c-card>
+
+      <!--header-->
+      <c-card-header class="table-header">
+        <strong>{{'title' | translate}}</strong>
+      </c-card-header>
+      <!-- // header-->
+
+      <!--body-->
+      <c-card-body>
+
+        <div>
+
+          <div *ngIf="frmGroup">
+            <c-row>
+              <c-col xs="12">
+                <c-card class="mb-4">
+
+                  <c-card-body>
+                    <form cForm [formGroup]="frmGroup">
+                      <!--form row-->
+                      <c-row>
+
+                        <c-col lg="3" md="6" xs="12">
+                          <label cLabel>
+                            {{'module' | translate}}
+                            <strong class="icon-warn">*</strong>
+                          </label>
+                          <mat-select-search
+                            [formGroup]="frmGroup"
+                            [controlName]="'module'"
+                            [data]="moduleDropdownList"
+                            (selectionChange)="selectModuleChange()">
+                          </mat-select-search>
+                        </c-col>
+
+                        <c-col lg="3" md="6" xs="12">
+                          <label cLabel>
+                            {{'reportMaster' | translate}}
+                            <strong class="icon-warn">*</strong>
+                          </label>
+                          <mat-select-search
+                            [formGroup]="frmGroup"
+                            [controlName]="'reportMaster'"
+                            [data]="reportMasterDropdownList"
+                            (selectionChange)="selectReportChange()">
+                          </mat-select-search>
+                        </c-col>
+
+                      </c-row>
+                      <!-- // form row-->
+                      <br/><br/><br/>
+                      <div style="width: 100%; height: auto; float: left;">
+                        <div id="htmlParamsBody"></div>
+                      </div>
+
+                      <br/>
+                      <br/>
+                      <!-- button row-->
+                      <c-row style="margin-top: 5%;" class="text-end pt-2">
+                        <c-col xs="12">
+                          <button class="custom-btn btn-default me-2 mb-2" (click)="refresh()" size="sm">
+                            <svg cIcon  name="cil-clear-all"></svg>
+                            {{'reset' | translate}}
+                          </button>
+                          <button  class="custom-btn btn-theme" (click)="printReport()" size="sm"
+                                   [disabled]="!frmGroup.valid || isLoadingPdf">
+                            <svg cIcon class="me-2" name="cil-save" *ngIf="!isLoadingPdf"></svg>
+                            <c-spinner aria-hidden="true" size="sm" *ngIf="isLoadingPdf"></c-spinner>
+                            {{'generatePdf' | translate}}
+                          </button>
+                          <button  class="custom-btn btn-theme me-2 mb-2" (click)="downloadReport()" size="sm"
+                                   [disabled]="!frmGroup.valid || isLoadingDownload">
+                            <svg cIcon class="me-2" name="cil-save" *ngIf="!isLoadingDownload"></svg>
+                            <c-spinner aria-hidden="true" size="sm" *ngIf="isLoadingDownload"></c-spinner>
+                            {{'downloadXlsx' | translate}}
+                          </button>
+                        </c-col>
+                      </c-row>
+                      <!-- // button row-->
+
+                    </form>
+                  </c-card-body>
+
+                </c-card>
+              </c-col>
+            </c-row>
+          </div>
+
+        </div>
+      </c-card-body>
+      <!--body-->
+
+    </c-card>
+
+  </c-col>
+
+</c-row>
+
+

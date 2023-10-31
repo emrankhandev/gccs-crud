@@ -1,0 +1,142 @@
+<div style="width: 100%">
+
+  <!-- close Button-->
+  <div  class="text-end">
+    <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+  </div>
+  <!-- // close Button-->
+
+  <!-- Main -->
+  <div>
+
+    <div *ngIf="frmGroup">
+      <c-row>
+        <c-col xs="12">
+          <c-card class="mb-4">
+            <!--header-->
+            <c-card-header>
+              <strong>{{'title' | translate}}</strong>
+            </c-card-header>
+            <!-- // header-->
+
+            <c-card-body>
+              <form cForm [formGroup]="frmGroup">
+                <!--form row-->
+                <c-row>
+
+                  <c-col lg="4" md="6" xs="12" class="mb-2">
+                    <label cLabel>
+                      {{'secondTitle' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <input  cFormControl sizing="sm" type="text" formControlName="title"/>
+                    <addies-error [formGroup]="frmGroup" controlName="title"></addies-error>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12" class="mb-2">
+                    <label cLabel>
+                      {{'name' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <input  cFormControl sizing="sm" type="text" formControlName="name"/>
+                    <addies-error [formGroup]="frmGroup" controlName="name"></addies-error>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12" class="mb-2">
+                    <label cLabel>
+                      {{'banglaName' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <input  cFormControl sizing="sm" type="text" formControlName="banglaName"/>
+                    <addies-error [formGroup]="frmGroup" controlName="banglaName"></addies-error>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12" class="mb-2">
+                    <label cLabel>
+                      {{'dataType' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <mat-select-search
+                      [formGroup]="frmGroup"
+                      [controlName]="'dataType'"
+                      [data]="reportDataTypeDropdownList"
+                      (selectionChange)="selectDataTypeChange()">
+                    </mat-select-search>
+                  </c-col>
+
+                  <c-col lg="12" md="12" xs="12" class="mb-2" *ngIf="isListDataType">
+                    <label cLabel>
+                      {{'sql' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <textarea  cFormControl sizing="sm" rows="3" maxlength="6000" #message1 formControlName="sql"></textarea>
+                    <mat-hint>{{message1.value.length}} / 6000</mat-hint>
+                    <addies-error [formGroup]="frmGroup" controlName="sql"></addies-error>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12" class="mb-2" *ngIf="isListDataType">
+                    <label cLabel>
+                      {{'child' | translate}}
+                    </label>
+                    <mat-select-search
+                      [formGroup]="frmGroup"
+                      [controlName]="'child'"
+                      [data]="childDropdownList"
+                      (selectionChange)="selectChildChange()">
+                    </mat-select-search>
+                  </c-col>
+
+                  <c-col lg="12" md="12" xs="12" class="mb-2" *ngIf="isListDataType">
+                    <label cLabel>
+                      {{'childSql' | translate}}
+                    </label>
+                    <textarea  cFormControl sizing="sm" rows="3" maxlength="6000" #message2 formControlName="childRelationSql"></textarea>
+                    <mat-hint>{{message2.value.length}} / 6000</mat-hint>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12">
+                    <label cLabel></label>
+                    <c-form-check>
+                      <input class="theme-color" cFormCheckInput type="checkbox" formControlName="active"/>
+                      <label cFormCheckLabel> {{'active' | translate}}</label>
+                    </c-form-check>
+                  </c-col>
+
+                </c-row>
+
+                <!-- // form row-->
+                <br/>
+                <!-- button row-->
+                <c-row class="text-end">
+                  <c-col xs="12">
+                    <button class="custom-btn btn-default me-2 mb-2" (click)="clearFormData()" size="sm">
+                      <svg cIcon  name="cil-clear-all"></svg>
+                      {{'reset' | translate}}
+                    </button>
+                    <button  class="custom-btn btn-theme" (click)="onSave()" *ngIf="!isEdit" size="sm"
+                             [disabled]="!frmGroup.valid || isLoading">
+                      <svg cIcon class="me-2" name="cil-save" *ngIf="!isLoading"></svg>
+                      <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                      {{'save' | translate}}
+                    </button>
+                    <button  class="custom-btn btn-theme" (click)="onUpdate()" *ngIf="isEdit" size="sm"
+                             [disabled]="!frmGroup.valid || isLoading">
+                      <svg cIcon class="me-2" name="cil-pencil" *ngIf="!isLoading"></svg>
+                      <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                      {{'update' | translate}}
+                    </button>
+                  </c-col>
+                </c-row>
+                <!-- // button row-->
+
+              </form>
+            </c-card-body>
+
+          </c-card>
+        </c-col>
+      </c-row>
+    </div>
+
+  </div>
+
+</div>

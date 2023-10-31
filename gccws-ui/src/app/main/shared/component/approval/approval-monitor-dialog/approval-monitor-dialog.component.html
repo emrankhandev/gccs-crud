@@ -1,0 +1,53 @@
+<div style="width: 100%">
+  <!-- Header -->
+  <div>
+    <div  class="text-end">
+      <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+    </div>
+  </div>
+  <!-- Header -->
+
+  <!-- Main -->
+  <div>
+    <c-row>
+      <c-col xs="12">
+        <c-card class="mb-4">
+          <!--header-->
+          <c-card-header class="modal-header">
+            <strong>{{'titleMonitoring' | translate}}</strong>
+          </c-card-header>
+          <!-- // header-->
+          <c-card-body mat-dialog-content class="mt-2" style="margin-left: -10px">
+            <c-card class="m-1" *ngFor="let obj of approvalHistoryList">
+              <c-card-body>
+                <c-row class="text-center">
+                  <p [class]="obj.iconColor" class="common-notification">
+                    {{obj.approvalStatusName}}</p>
+                </c-row>
+                <c-row class="mb-1">
+                  <c-col sm="2" md="2" lg="2">{{obj.fromHeading | translate}}</c-col>
+                  <c-col sm="1" md="1" lg="1">:</c-col>
+                  <c-col sm="9" md="9" lg="9">{{obj.fromAppUserName}} | {{obj.fromTeamName}}</c-col>
+                </c-row>
+                <c-row *ngIf="obj.defaultAppUserId" class="mb-1">
+                  <c-col sm="2" md="2" lg="2">{{'to'| translate}}</c-col>
+                  <c-col sm="1" md="1" lg="1">:</c-col>
+                  <c-col sm="9" md="9" lg="9" class="d-flex justify-content-between">
+                    <p>{{obj.defaultAppUserName}} | {{obj.toTeamName}} </p><p class="fw-bold ps-2 seen-color" *ngIf="obj.isSeen">{{'seen'|translate}}{{obj.seenDate | dateAsAgo}})</p></c-col>
+              </c-row>
+                <c-row>
+                  <c-col sm="2" md="2" lg="2">{{'comment'| translate}}</c-col>
+                  <c-col sm="1" md="1" lg="1">:</c-col>
+                  <c-col sm="9" md="9" lg="9">{{obj.approvalComment}}</c-col>
+                </c-row>
+
+              </c-card-body>
+            </c-card>
+          </c-card-body>
+        </c-card>
+      </c-col>
+    </c-row>
+  </div>
+  <!-- // Main -->
+
+</div>

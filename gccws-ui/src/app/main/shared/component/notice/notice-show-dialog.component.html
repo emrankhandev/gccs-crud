@@ -1,0 +1,60 @@
+<div>
+  <div class="text-end">
+    <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+  </div>
+
+  <c-card class="mb-4">
+    <!--header-->
+    <c-card-header>
+      <div>
+        <strong class="text-center">{{'messageInfo'|translate}}</strong>
+      </div>
+    </c-card-header>
+    <c-card-body [formGroup]="frmGroup">
+      <form cForm>
+
+        <div>
+          <c-row *ngIf="model.authorityId" class="mb-1">
+            <c-col lg="2" md="6" xs="6">{{'authority' | translate}}</c-col>
+            <c-col lg="1" md="1" >:</c-col>
+            <c-col lg="9" md="5" xs="5">{{model.authorityName}}</c-col>
+          </c-row>
+
+          <c-row class="mb-1">
+            <c-col lg="2" md="6" xs="6">{{'publishDate' | translate}}</c-col>
+            <c-col lg="1" md="1" >:</c-col>
+            <c-col lg="9" md="5" xs="5">{{model.publishDate | date:'dd-MM-yyyy'}}</c-col>
+          </c-row>
+
+          <c-row class="mb-1" >
+            <c-col lg="2" md="6" xs="6">{{'message' | translate}}</c-col>
+            <c-col lg="1" md="1" >:</c-col>
+            <c-col lg="9" md="5" xs="5">{{model.message}}</c-col>
+          </c-row>
+
+          <c-row class="mb-1">
+            <c-col lg="2" md="6" xs="6">{{'description' | translate}}</c-col>
+            <c-col lg="1" md="1" >:</c-col>
+            <c-col lg="9" md="5" xs="5"  style="color: green">{{model.description}}</c-col>
+          </c-row>
+
+          <c-row class="mb-1" *ngIf="model.attachment">
+            <c-col lg="2" md="6" xs="6">
+              <span *ngIf="model.transactionType !== 'Agent Approved'">{{'document' | translate}}</span>
+              <span *ngIf="model.transactionType === 'Agent Approved'">{{'validationDate' | translate}}</span></c-col>
+            <c-col lg="1" md="1" >:</c-col>
+            <c-col lg="9" md="5" xs="5">
+              <a *ngIf="model.transactionType !== 'Agent Approved'" href="{{ fileService.viewPdfUrl(model.attachment)}}" target="_blank">{{ model.attachment}}</a>
+              <span *ngIf="model.transactionType === 'Agent Approved'">{{ validDate  | date:'dd-MM-yyyy'}}</span>
+            </c-col>
+          </c-row>
+
+        </div>
+
+      </form>
+    </c-card-body>
+  </c-card>
+
+
+</div>
+

@@ -1,0 +1,53 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: 9401
+
+#jasypt:
+#  encryptor:
+#    password: addies@encp
+---
+#Dev
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test1
+    username: postgres
+    password: 1996
+    initialization-mode: always
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: create # When you launch the application for the first time - switch "none" at "create"
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+  config:
+    activate:
+      on-profile: dev
+      # Database
+---
+#Prod
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test1
+    username: ENC()
+    password: ENC()
+    initialization-mode: always
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: update # When you launch the application for the first time - switch "none" at "create"
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+  config:
+    activate:
+      on-profile: prod
+      # Database

@@ -1,0 +1,66 @@
+<!--sidebar-->
+<c-sidebar
+  #sidebar="cSidebar"
+  class="d-print-none sidebar sidebar-fixed color-theme"
+  id="sidebar"
+  visible>
+
+
+  <!--top image-->
+    <!--<c-sidebar-brand
+      [brandFull]="{
+      src: 'assets/img/logo/gccws-logo.png',
+      alt: 'CoreUI Logo',
+      height: '50px'
+    }"
+      routerLink="./"
+      class="custom-btn color-theme sidebar-logo" style="border-radius: 0px"
+    >
+    </c-sidebar-brand>-->
+  <!-- // top image-->
+
+  <!--active Username-->
+  <div class="user" *ngIf="userInfo">
+    <h4 class="active activeUserName">{{userInfo.displayName}}</h4>
+    <h5 class="active activeUser" style="color: #ffecb5">{{userInfo.username}}</h5>
+  </div>
+  <!-- // active Username-->
+
+  <!--side menu-->
+  <perfect-scrollbar [config]="perfectScrollbarConfig">
+      <c-sidebar-nav
+        [navItems]="navItems" >
+      </c-sidebar-nav>
+  </perfect-scrollbar>
+  <!-- // side menu-->
+
+  <!--bottom toggle-->
+  <c-sidebar-toggler
+    *ngIf="!sidebar.narrow"
+    toggle="unfoldable"
+    cSidebarToggle="sidebar">
+  </c-sidebar-toggler>
+  <!--bottom toggle-->
+
+</c-sidebar>
+<!-- // sidebar-->
+
+<!--main-->
+<div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+
+  <!--nav-header-->
+  <app-default-header
+    (setNav)="setNavData($event)"
+    class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar">
+  </app-default-header>
+  <!-- // nav-header-->
+
+  <!--app-body-->
+  <div class="body flex-grow-1 px-3" id="main-body">
+    <!--<c-container breakpoint="lg" class="h-auto">-->
+      <router-outlet></router-outlet>
+    <!--</c-container>-->
+  </div>
+  <!--app footer-->
+  <!--<app-default-footer></app-default-footer>-->
+</div>

@@ -1,0 +1,27 @@
+.link-text{
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #4F46E5;
+  margin-bottom: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.agent-dashboard {
+  display: flex;
+  height: 5vh;
+  flex-direction: column;
+}
+
+.test{
+  height: 85vh;
+  width: 100%;
+}
+.test img{
+  height: 100%;
+  width: 100%;
+}

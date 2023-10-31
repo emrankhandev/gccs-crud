@@ -1,0 +1,11 @@
+<span class="error-message">
+  <span  *ngIf="formField.touched && formField.errors?.['required']">Field must be entered !!</span>
+  <span  *ngIf="formField.touched && formField.errors?.['email']">Invalid email !!</span>
+  <span  *ngIf="formField.touched && formField.errors?.['pattern']">Invalid Input!!</span>
+  <span  *ngIf="formField.touched && formField.errors?.['cannotContainSpace']">WhiteSpace are not allowed!!</span>
+  <span  *ngIf="formField.errors?.['mustMatch']">not match!!</span>
+  <span  *ngIf="formField.touched && formField.errors?.['minLength']">invalid input !!</span>
+  <span  *ngIf="formField.touched && formField.errors?.['maximum']">invalid input !!</span>
+</span>
+
+

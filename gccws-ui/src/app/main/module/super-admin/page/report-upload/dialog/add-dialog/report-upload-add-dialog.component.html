@@ -1,0 +1,118 @@
+<div style="width: 100%">
+
+  <!-- close Button-->
+  <div  class="text-end">
+    <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+  </div>
+  <!-- // close Button-->
+
+  <!-- Main -->
+  <div>
+
+    <div *ngIf="frmGroup">
+      <c-row>
+        <c-col xs="12">
+          <c-card class="mb-4">
+            <!--header-->
+            <c-card-header>
+              <strong>{{'title' | translate}}</strong>
+            </c-card-header>
+            <!-- // header-->
+
+            <c-card-body>
+              <form cForm [formGroup]="frmGroup">
+                <!--form row-->
+                <c-row>
+
+                  <c-col lg="4" md="6" xs="12">
+                    <label cLabel>
+                      {{'code' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <input cFormControl sizing="sm" type="text"  formControlName="code"/>
+
+                    <!--error message-->
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'code'"></addies-error>
+                  </c-col>
+
+                  <c-col lg="6" md="6" xs="12">
+                    <label cLabel>
+                      {{'file' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <input  cFormControl sizing="sm" type="file" formControlName="fileNameControl" (change)="onFileSelect($event, 'file', fileTypeFile)"/>
+
+                    <!--error message-->
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'file'"></addies-error>
+                  </c-col>
+
+                  <c-col lg="1" md="1" xs="1" class="mb-2">
+                    <div class="wrapper" style="margin-top: 30px">
+                      <div class="icon facebook">
+                        <div class="tooltip">
+                          <div>
+                            <!--<h5 class="text-muted">Width: {{ fileValidatorFile.fileWidth }}px, Height: {{ fileValidatorFile.fileHeight }}px</h5>-->
+                            <h5 class="text-muted">Size: {{ fileValidatorFile.fileSize / 1024}} KB (max.), Ext.: {{ fileValidatorFile.fileExtensions }}</h5>
+                            <div class="square" [style]="'width: ' + fileValidatorFile.fileWidth / 4 + 'px'+';height: ' + fileValidatorFile.fileHeight / 4 + 'px'"></div>
+                          </div>
+                        </div>
+                        <i class="fas fa-info-circle"></i>
+                      </div>
+                    </div>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12" class="mt-2">
+                    <label cLabel>
+                      {{'remarks' | translate}}
+                    </label>
+                    <textarea cFormControl sizing="sm" rows="1" formControlName="remarks"></textarea>
+                  </c-col>
+
+                  <c-col lg="2" md="6" xs="12" class="mt-2">
+                    <label cLabel></label>
+                    <c-form-check>
+                      <input class="theme-color" cFormCheckInput  type="checkbox" formControlName="isSubreport"/>
+                      <label cFormCheckLabel>
+                        {{'isSubreport' | translate}}
+                      </label>
+                    </c-form-check>
+                  </c-col>
+
+                </c-row>
+                <!-- // form row-->
+
+              </form>
+
+              <br/>
+              <!-- button row-->
+              <c-row class="text-end">
+                <c-col xs="12">
+                  <button class="custom-btn btn-default me-2 mb-2" (click)="clearFormData()" size="sm">
+                    <svg cIcon  name="cil-clear-all"></svg>
+                    {{'reset' | translate}}
+                  </button>
+                  <button  class="custom-btn btn-theme" (click)="onSave()" *ngIf="!isEdit" size="sm"
+                           [disabled]="!frmGroup.valid || isLoading">
+                    <svg cIcon class="me-2" name="cil-save" *ngIf="!isLoading"></svg>
+                    <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                    {{'save' | translate}}
+                  </button>
+                  <button  class="custom-btn btn-theme" (click)="onUpdate()" *ngIf="isEdit" size="sm"
+                           [disabled]="!frmGroup.valid || isLoading">
+                    <svg cIcon class="me-2" name="cil-pencil" *ngIf="!isLoading"></svg>
+                    <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                    {{'update' | translate}}
+                  </button>
+                </c-col>
+              </c-row>
+              <!-- // button row-->
+            </c-card-body>
+
+          </c-card>
+        </c-col>
+      </c-row>
+    </div>
+
+  </div>
+
+</div>

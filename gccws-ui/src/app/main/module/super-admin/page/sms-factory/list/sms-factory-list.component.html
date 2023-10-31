@@ -1,0 +1,87 @@
+<c-row ngPreserveWhitespaces >
+
+  <c-col xs="12" *ngIf="pagePermission.view">
+    <c-card class="mb-4">
+
+      <!--header-->
+      <c-card-header class="table-header">
+        <svg cIcon class="me-2" size="lg" name="cil-envelope-closed"></svg>
+        <strong>{{'title' | translate}}</strong>
+      </c-card-header>
+
+        <form cForm [formGroup]="frmGroup">
+          <c-row>
+            <c-col xs="3" sm="0"  md="0"></c-col>
+            <c-col xs="6" sm="12"  md="6">
+              <!--form row-->
+              <div class="mt-5">
+                <c-row>
+                  <c-col>
+                    <mat-radio-group formControlName="smsType">
+                      <mat-radio-button value="Text">{{ 'english' | translate }}</mat-radio-button>
+                      <mat-radio-button value="Unicode" class="ms-3">{{ 'unicode' | translate }}</mat-radio-button>
+                    </mat-radio-group>
+                  </c-col>
+                </c-row>
+              </div>
+              <div class="mt-4">
+                <c-row *ngIf="fileField">
+                  <c-col >
+                    <label cLabel>
+                      {{'file' | translate}}
+                    </label>
+                    <input title="{{'noFileChose' | translate}}"  cFormControl sizing="sm" type="file" formControlName="file" (change)="onFileSelect($event)" accept=".csv"/>
+                  </c-col>
+                </c-row>
+
+                <c-row *ngIf="mobileField">
+                  <c-col class="mt-4">
+                    <label cLabel>
+                      {{'mobile' | translate}}
+                    </label>
+                    <input  cFormControl sizing="sm" type="text" formControlName="mobile"/>
+                  </c-col>
+                </c-row>
+
+                <c-row>
+                  <c-col class="mt-4">
+                    <label cLabel>
+                      <svg cIcon class="me-2" size="lg" name="cil-pencil"></svg>
+                      {{'writeMessageHere' | translate}} . . .
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <textarea  cFormControl sizing="sm" rows="10" maxlength="250" #message formControlName="sms"></textarea>
+                    <mat-hint align="end">{{message.value.length}} / 250</mat-hint>
+                  </c-col>
+                </c-row>
+              </div>
+
+              <!-- button row-->
+              <c-row class="mt-5">
+                <c-col xs="12" class="text-center">
+                  <button class="custom-btn btn-default me-2 mb-2" (click)="clearFormData()" size="sm">
+                    <svg cIcon  name="cil-clear-all"></svg>
+                    {{'reset' | translate}}
+                  </button>
+                  <button  class="custom-btn btn-theme" (click)="onSave()" *ngIf="!isEdit" size="sm"
+                           [disabled]="!frmGroup.valid || isLoading">
+                    <svg cIcon class="me-2" name="cil-send" *ngIf="!isLoading"></svg>
+                    <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                    {{'send' | translate}}
+                  </button>
+                </c-col>
+              </c-row>
+            </c-col>
+            <c-col xs="3" sm="0"  md="0"></c-col>
+
+          </c-row>
+          <!-- // form row-->
+        </form>
+
+        <br/>
+      <!--body-->
+    </c-card>
+  </c-col>
+</c-row>
+
+

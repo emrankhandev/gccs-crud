@@ -1,0 +1,187 @@
+<div style="width: 100%">
+
+  <!-- close Button-->
+  <div  class="text-end">
+    <mat-icon (click)="closeDialog()" class="icon-warn action" [matTooltip]="'cancel'| translate">cancel</mat-icon>
+  </div>
+  <!-- // close Button-->
+
+  <!-- Main -->
+  <div>
+
+    <div *ngIf="frmGroup">
+      <c-row>
+        <c-col xs="12">
+          <c-card class="mb-4">
+            <!--header-->
+            <c-card-header>
+              <strong>{{'title' | translate}}</strong>
+            </c-card-header>
+            <!-- // header-->
+
+            <c-card-body mat-dialog-content>
+              <form cForm [formGroup]="frmGroup">
+                <!--form row-->
+                <c-row class="p-2">
+
+                  <c-col lg="4" md="6" xs="12">
+                    <label cLabel>
+                      {{'name' | translate}}
+                      <strong class="icon-warn">*</strong>
+                    </label>
+                    <input cFormControl sizing="sm" type="text"  formControlName="name"/>
+                    <!--error message-->
+                    <addies-error [formGroup]="this.frmGroup" [controlName]="'name'"></addies-error>
+                  </c-col>
+
+                  <c-col lg="4" md="6" xs="12">
+                    <label cLabel>
+                      {{'banglaName' | translate}}
+                      <!--<strong class="icon-warn">*</strong>-->
+                    </label>
+                    <input  cFormControl sizing="sm" type="text" formControlName="banglaName"/>
+                    <!--error message-->
+                    <!--<addies-error [formGroup]="this.frmGroup" [controlName]="'banglaName'"></addies-error>-->
+                  </c-col>
+
+                </c-row>
+                <!-- // form row-->
+
+                <br>
+                <!--master details-->
+                <div style="width: 100%" *ngIf="frmGroupDetails">
+                  <!-- body Card -->
+                  <c-card>
+                    <!-- form div -->
+                    <div class="p-2">
+
+                      <form [formGroup]="frmGroupDetails">
+
+                        <table mat-table [dataSource]="dataSourceDetails" class="mat-elevation-z8" formArrayName="scope">
+
+                          <ng-container matColumnDef="menuItem">
+                            <th  *matHeaderCellDef>{{'menuItem' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index">
+                              <div class="m-1" style="display: flow-root">
+                                <mat-select-search
+                                  [formGroup]="row"
+                                  [controlName]="'menuItem'"
+                                  [data]="menuItemDropdownList"
+                                  (selectionChange)="getMenuItemById(row)">
+                                </mat-select-search>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="insert">
+                            <th  *matHeaderCellDef>{{'insert' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index" class="text-center">
+                              <div *ngIf="row.get('menuItemFullObj').value.insert">
+                                <input class="theme-color" cFormCheckInput  type="checkbox" formControlName="insert"/>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="edit">
+                            <th  *matHeaderCellDef>{{'hasEdit' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index" class="text-center">
+                              <div *ngIf="row.get('menuItemFullObj').value.edit">
+                                <input class="theme-color" cFormCheckInput  type="checkbox" formControlName="edit"/>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="delete">
+                            <th  *matHeaderCellDef>{{'hasDelete' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index" class="text-center">
+                              <div *ngIf="row.get('menuItemFullObj').value.delete">
+                                <input class="theme-color" cFormCheckInput  type="checkbox" formControlName="delete"/>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="view">
+                            <th  *matHeaderCellDef>{{'view' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index" class="text-center">
+                              <div *ngIf="row.get('menuItemFullObj').value.view">
+                                <input class="theme-color" cFormCheckInput  type="checkbox" formControlName="view"/>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="approve">
+                            <th  *matHeaderCellDef>{{'approve' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index" class="text-center">
+                              <div *ngIf="row.get('menuItemFullObj').value.approve">
+                                <input class="theme-color" cFormCheckInput  type="checkbox" formControlName="approve"/>
+                              </div>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="action">
+                            <th  *matHeaderCellDef>{{'action' | translate}}</th>
+                            <td mat-cell *matCellDef="let row; let index = index" [formGroupName]="index" class="text-center">
+                              <span class="action" (click)="addRow()" [matTooltip]="'edit'| translate">
+                                <svg cIcon class="me-2 icon-theme" name="cil-plus"></svg>
+                              </span>
+                              <span class="action"  (click)="deleteRow(index)" [matTooltip]="'delete'| translate">
+                                 <svg cIcon class="me-2 icon-warn" name="cil-trash"></svg>
+                              </span>
+                            </td>
+                          </ng-container>
+
+                          <!--bind with ts-->
+                          <tr mat-header-row
+                              *matHeaderRowDef="displayColumnsDetails"></tr>
+                          <tr mat-row
+                              *matRowDef="let row; let i = index; columns: displayColumnsDetails;"></tr>
+                          <!-- //bind with ts-->
+
+                        </table>
+
+                      </form>
+
+                    </div>
+                    <!-- // form div -->
+                  </c-card>
+                  <!-- // body Card -->
+                </div>
+                <!--  // master details-->
+
+              </form>
+
+              <br/>
+              <!-- button row-->
+              <div class="margin-right">
+                <c-row class="text-end">
+                  <c-col xs="12">
+                    <button class="custom-btn btn-default me-2 mb-2" (click)="clearFormData()" size="sm">
+                      <svg cIcon  name="cil-clear-all"></svg>
+                      {{'reset' | translate}}
+                    </button>
+                    <button  class="custom-btn btn-theme" (click)="onSave()" *ngIf="!isEdit" size="sm"
+                             [disabled]="!frmGroup.valid || !frmGroupDetails.valid || isLoading">
+                      <svg cIcon class="me-2" name="cil-save" *ngIf="!isLoading"></svg>
+                      <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                      {{'save' | translate}}
+                    </button>
+                    <button  class="custom-btn btn-theme" (click)="onUpdate()" *ngIf="isEdit" size="sm"
+                             [disabled]="!frmGroup.valid || !frmGroupDetails.valid || isLoading">
+                      <svg cIcon class="me-2" name="cil-pencil" *ngIf="!isLoading"></svg>
+                      <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+                      {{'update' | translate}}
+                    </button>
+                  </c-col>
+                </c-row>
+              </div>
+              <!-- // button row-->
+            </c-card-body>
+
+          </c-card>
+        </c-col>
+      </c-row>
+    </div>
+
+  </div>
+
+</div>

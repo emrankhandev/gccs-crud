@@ -1,0 +1,50 @@
+<div class="login-bg" *ngIf="frmGroup">
+  <div class="login-container">
+    <div>
+      <img class="logo" src="assets/img/logo/gccws-logo.png" alt="Company Logo">
+      <h2 class="company-name">Gazipur City Corporation</h2>
+      <p class="test-small">Water Supply Billing Management System</p>
+    </div>
+    <h2 class="login-test">Welcome Admin</h2>
+    <form class="login-form" [formGroup]="frmGroup">
+      <label>User ID</label>
+      <input type="text" id="username" cFormControl formControlName="userName" placeholder="Type here.." #userName/>
+      <addies-error [formGroup]="this.frmGroup" [controlName]="'userName'"></addies-error>
+
+      <label>Password</label>
+      <div class="form-group inner-addon right-addon">
+        <div class="input-group  mx-auto">
+          <input name="password"
+                 [type]="showNewPassword ? 'text' : 'password'"
+                 class="form-control pwd-control" formControlName="password"
+                 placeholder="******">
+
+          <div>
+            <i alt="show" class="far fa-eye eye-show"
+               (click)="showNewPassword = !showNewPassword"
+               [class.hide]="showNewPassword"></i>
+            <i alt="hide" class="far fa-eye-slash eye-hide"
+               (click)="showNewPassword = !showNewPassword"
+               [class.hide]="!showNewPassword"></i>
+          </div>
+        </div>
+        <addies-error [formGroup]="this.frmGroup" [controlName]="'password'"></addies-error>
+        <div class="col-sm-offset-2 col-sm-12 text-end mt-1" id="forget-pass">
+          <p class="text-success action" (click)="recoverPasswordDialog()">Forgot password?</p>
+        </div>
+
+      </div>
+      <button class="m-1 login-btn login-theme"
+              [disabled]="!frmGroup.valid"
+              (click)="signIn()">
+        <svg cIcon name="cil-chevron-double-right" *ngIf="!isLoading"></svg>
+        <c-spinner aria-hidden="true" size="sm" *ngIf="isLoading"></c-spinner>
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+

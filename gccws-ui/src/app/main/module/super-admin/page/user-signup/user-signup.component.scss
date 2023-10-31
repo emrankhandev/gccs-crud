@@ -1,0 +1,126 @@
+body{
+  background-color: #25274d;
+}
+
+.contact{
+  padding: 4%;
+  height: 400px;
+}
+.col-md-3{
+  background: #ff9b00;
+  padding: 4%;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.contact-info h2{
+  margin-bottom: 10%;
+}
+.col-md-9{
+  background: #fff;
+  padding: 3%;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.contact-form button{
+  background: #25274d;
+  color: #fff;
+  font-weight: 600;
+  width: 25%;
+}
+.contact-form button:focus{
+  box-shadow:none;
+}
+
+
+#btn{
+  display: block;
+  text-align: center;
+  width: 100%;
+  background-color: #25274d;
+}
+
+
+#forget-pass{
+  margin-right: 100px
+}
+
+.bottom-part{
+  padding-top:15px;
+  font-size:100%
+}
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap; // For form validation feedback
+  align-items: stretch;
+ // width: 100%;
+}
+
+//password show-hide
+
+.pass-control{
+  width: 100% !important;
+  border-right: 5px;
+}
+
+.hide {
+  display: none;
+}
+.inner-addon {
+  position: relative;
+}
+.inner-addon .far, .inner-addon .fas {
+  position: absolute;
+  padding: 13px 10px;
+  z-index: 100;
+  cursor: pointer;
+}
+.left-addon .far, .left-addon .fas  { left:  0px; }
+.right-addon .far, .right-addon .fas { right: 0px; }
+
+.left-addon input  { padding-left:  0px; }
+.right-addon input { padding-right: 0px; }
+
+
+#signup-text{
+  font-size: xx-large;
+  font-weight: bolder;
+  color: black;
+}
+
+//radio btn
+.mat-radio-button.mat-accent .mat-radio-outer-circle{
+  border-color: black
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  border-color: black
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .signup-img{
+    text-align: center;
+    //margin: 100px 100px;
+    width: 73%;
+  }
+}
+
+
+.mat-select-trigger {
+  margin-top: 10px;
+}
+
+.autocompleteOff{
+  -webkit-text-security: unset;
+}
+
+.login-btn {
+  display: inline;
+}
+
+.btn-link{
+  color: #13007c;
+  text-decoration: underline;
+  cursor: pointer;
+}

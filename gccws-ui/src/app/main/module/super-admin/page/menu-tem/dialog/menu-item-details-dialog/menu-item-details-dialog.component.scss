@@ -1,0 +1,14 @@
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+$btn-default1: rgba(6, 41, 78, 0.87);
+
+th {
+  // background-color: $base-color;
+  background-color: $btn-default1;
+  color: white;
+  font-size: small;
+  font-weight: bold;
+}
